@@ -3,7 +3,7 @@
 @section('contents')
     <h1>Add new project</h1>
 
-    <form method="POST" action="{{ route('admin.project.store') }}">
+    <form method="POST" action="{{ route('admin.project.store') }}" enctype="multipart/form-data">
         @csrf
 
         <div class="mb-3">
@@ -20,18 +20,45 @@
             </div>
         </div>
 
-        <div class="mb-3">
-            <label for="category" class="form-label">Category</label>
-            <select class="form-select @error('category_id') is-invalid @enderror" id="category" name="category_id">
-                <option selected>Change Category</option>
+        <div class="input-group mb-3">
+            <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image">
+            <label class="input-group-text" for="image">Upload</label>
+            <div class="invalid-feedback">
+                @error('image') {{ $message }} @enderror
+            </div>
+        </div>
 
-                @foreach ($categories as $category)
-                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+        <div class="mb-3">
+            <label for="type" class="form-label">type</label>
+            <select class="form-select @error('type_id') is-invalid @enderror" id="type" name="type_id">
+                <option selected>Change type</option>
+
+                @foreach ($types as $type)
+                    <option value="{{ $type->id }}">{{ $type->name }}</option>
                 @endforeach
             </select>
             <div class="invalid-feedback">
-                @error('category_id') {{ $message }} @enderror
+                @error('type_id') {{ $message }} @enderror
             </div>
+        </div>  
+
+        <div class="mb-3">
+            <h6>technologies</h6>
+            @foreach ($technologies as $technology)
+            <div class="form-check">
+                <input 
+                    class="form-check-input" 
+                    type="checkbox" 
+                    id="technology{{ $technology->id }}" 
+                    value="{{ $technology->id }}"
+                    name="technologies[]"
+                    @if (in_array($technology->id, old('technologies') ?: [])) checked @endif 
+                >
+                <label class="form-check-label" for="technology{{ $technology->id }}">
+               {{ $technology->name }}
+                </label>
+            </div>
+            @endforeach
         </div>  
 
         <div class="mb-3">
@@ -102,7 +129,7 @@
             </div>
         </div>
 
-        <div class="mb-3">
+        {{-- <div class="mb-3">
             <label for="languages" class="form-label">Languages</label>
             <input
                 type="text"
@@ -114,7 +141,7 @@
             <div class="invalid-feedback">
                 @error('languages') {{ $message }} @enderror
             </div>
-        </div>
+        </div> --}}
 
         <div class="mb-3">
             <label for="link_github" class="form-label">Link github</label>

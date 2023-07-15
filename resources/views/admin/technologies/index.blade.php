@@ -2,16 +2,12 @@
 
 @section('contents')
 
-@if (session('delete_success'))
+@if (session('technology_delete_success'))
 @php
-    $project = session('delete_success')
+    $technology = session('technology_delete_success')
 @endphp
 <div class="alert alert-danger">
-    "{{ $project->title }}" has been moved to the trash!!
-    <form action="{{ route("admin.project.cancel", ['project' => $project] )}}" method="post">
-        @csrf
-        <button class="btn btn-warning">Cancel</button>
-    </form>
+    "{{ $technology->name }}" has been deleted!!
 </div>
 @endif
 
@@ -24,14 +20,14 @@
         </tr>
     </thead>
     <tbody>
-        @foreach ($categories as $category)
+        @foreach ($technologies as $technology)
             <tr>
-                <th scope="row">{{ $category->id }}</th>
-                <td>{{ $category->name }}</td>
+                <th scope="row">{{ $technology->id }}</th>
+                <td>{{ $technology->name }}</td>
                 <td>
-                    <a class="btn btn-primary" href="{{ route('admin.category.show', ['category' => $category]) }}">View</a>
-                    <a class="btn btn-warning" href="{{ route('admin.category.edit', ['category' => $category]) }}">Edit</a>
-                    <button type="button" class="btn btn-danger js-delete" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{{ $category->id }}">
+                    <a class="btn btn-primary" href="{{ route('admin.technology.show', ['technology' => $technology]) }}">View</a>
+                    <a class="btn btn-warning" href="{{ route('admin.technology.edit', ['technology' => $technology]) }}">Edit</a>
+                    <button type="button" class="btn btn-danger js-delete" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{{ $technology->id }}">
                         Delete
                     </button>
                     
@@ -55,10 +51,10 @@
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
                 <form
                     action=""
-                    data-template= "{{ route('admin.category.destroy', ['category' => '*****']) }}"
+                    data-template= "{{ route('admin.technology.destroy', ['technology' => '*****']) }}"
                     method="post"
                     class="d-inline-block"
-                    id="btn-confirm-delete"
+                    id="confirm-delete"
                 >
                     @csrf
                     @method('delete')

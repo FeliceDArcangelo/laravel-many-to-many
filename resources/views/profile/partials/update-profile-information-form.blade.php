@@ -4,7 +4,7 @@
     </form>
     <form action="{{ route('admin.profile.update') }}" method="post">
         @csrf
-        @method('patch')
+        @method('PATCH')
         <div class="mb-3">
             <label for="name" class="form-label">Name</label>
             <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}">
@@ -22,26 +22,26 @@
                 </div>
             </div>
             @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
-            <div>
-                <p>
-                    {{ ('Your email address is unverified.') }}
-
-                    <button form="send-verification">
-                        {{ ('Click here to re-send the verification email.') }}
-                    </button>
-                </p>
-
-                @if (session('status') === 'verification-link-sent')
+                <div>
                     <p>
-                        {{ __('A new verification link has been sent to your email address.') }}
+                        {{ __('Your email address is unverified.') }}
+
+                        <button form="send-verification">
+                            {{ __('Click here to re-send the verification email.') }}
+                        </button>
                     </p>
-                @endif
-            </div>
-        @endif
+
+                    @if (session('status') === 'verification-link-sent')
+                        <p>
+                            {{ __('A new verification link has been sent to your email address.') }}
+                        </p>
+                    @endif
+                </div>
+            @endif
         </div>
         <div class="d-flex align-items-center gap-4">
-            <button class="btn btn-primary">{{ ('Save') }}</button>
-
+            <button class="btn btn-primary">{{ __('Save') }}</button>
+        
             @if (session('status') === 'profile-updated')
                 <p
                     x-data="{ show: true }"
@@ -49,7 +49,7 @@
                     x-transition
                     x-init="setTimeout(() => show = false, 2000)"
                     class="text-sm text-gray-600"
-                >Update</p>
+                >Updated</p>
             @endif
         </div>
     </form>

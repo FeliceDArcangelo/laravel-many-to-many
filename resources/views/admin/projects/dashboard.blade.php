@@ -16,9 +16,10 @@
     </div>
 </x-app-layout> --}}
 
-@extends('admin.layouts.base')
+@extends('Admin.layouts.base')
 
 @section('contents')
-    benvenuto
-    {{-- <a class="btn btn-primary" href="{{ route('admin.projects.index') }}">index</a> --}}
+    
+    benvenuto!
+
 @endsection

@@ -28,16 +28,18 @@
     </div>
 </x-app-layout> --}}
 
-@extends('admin.layouts.base')
+@extends('Admin.layouts.base')
 
 @section('contents')
-    <div>
-        @include('profile.partials.update-profile-information-form')
-    </div>
-    <div>
-        @include('profile.partials.update-password-form')
-    </div>
-    <div>
-        @include('profile.partials.delete-user-form')
+    <div class="container">
+        <div>
+            @include('profile.partials.update-profile-information-form')
+        </div>
+        <div>
+            @include('profile.partials.update-password-form')
+        </div>
+        <div>
+            @include('profile.partials.delete-user-form')
+        </div>
     </div>
 @endsection

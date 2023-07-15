@@ -8,7 +8,7 @@
     <title>Document</title>
 </head>
 <body>
-    @include('guests.includes.header')
+    @include('Guest.includes.header')
 
     <div class="container">
         <main>
@@ -16,6 +16,6 @@
         </main>
     </div>
 
-    @include('guests.includes.footer')
+    @include('Guest.includes.footer')
 </body>
 </html>

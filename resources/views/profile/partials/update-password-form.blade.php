@@ -1,25 +1,25 @@
-<form method="post" action="{{ route('password.update') }}" class="mt-6 space-y-6">
+<form action="{{ route('password.update') }}" method="post">
     @csrf
     @method('put')
 
     <div class="mb-3">
-        <label for="current_password" class="form-label" value="Current Password">Current password</label>
-        <input type="password" class="form-control" id="current_password" name="current_password">
-    </div>
-
-    <div class="mb-3">
-        <label for="password" class="form-label" value="New Password">New password</label>
+        <label for="password" class="form-label">Current Password</label>
         <input type="password" class="form-control" id="password" name="password">
+        {{-- <x-input-error :messages="$errors->updatePassword->get('current_password')" class="mt-2" /> --}}
     </div>
-
     <div class="mb-3">
-        <label for="password_confirmation" class="form-label" value="Confirm Password">Password Confirmation</label>
-        <input type="password" class="form-control" id="password_confirmation" name="password_confirmation">
+        <label for="password" class="form-label">New Password</label>
+        <input type="password" class="form-control" id="password" name="password">
+        {{-- <x-input-error :messages="$errors->updatePassword->get('password')" class="mt-2" /> --}}
     </div>
-
-    <div class="flex items-center gap-4">
-        <x-primary-button>{{ __('Save') }}</x-primary-button>
-
+    <div class="mb-3">
+        <label for="password" class="form-label">Password Confirmation</label>
+        <input type="password" class="form-control" id="password" name="password_confirmation">
+        {{-- <x-input-error :messages="$errors->updatePassword->get('password_confirmation')" class="mt-2" /> --}}
+    </div>
+    <div class="d-flex align-items-center gap-4">
+        <button class="btn btn-primary">{{ __('Save') }}</button>
+    
         @if (session('status') === 'password-updated')
             <p
                 x-data="{ show: true }"
@@ -27,10 +27,7 @@
                 x-transition
                 x-init="setTimeout(() => show = false, 2000)"
                 class="text-sm text-gray-600"
-            >Saved</p>
+            >Updated</p>
         @endif
     </div>
-      
-
-
 </form>
